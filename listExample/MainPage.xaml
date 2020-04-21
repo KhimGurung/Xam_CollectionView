@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="listExample.MainPage"
+             Title="{Binding Title}"
+             x:Name="ViewPage">
+    <StackLayout>
+        <!-- Place new controls here -->
+        <CollectionView ItemsSource="{Binding Product}">
+            <CollectionView.ItemsLayout>
+               <GridItemsLayout Orientation="Vertical"
+                                VerticalItemSpacing="20"
+                                HorizontalItemSpacing="30" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                        <Frame Padding="0"
+                               HasShadow="False">
+                            <FlexLayout Direction="Row"
+                                        Padding="5"
+                                        AlignItems="Center">
+                                    <Frame Padding="0"
+                                           Margin="10, 0, 10, 0"
+                                           HasShadow="False"
+                                           HeightRequest="30"
+                                           WidthRequest="30"
+                                           CornerRadius="15"
+                                           BackgroundColor="Green">
+                                        <Label Text="{Binding Id}"
+                                               TextColor="White"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+                                    </Frame>
+                                <StackLayout FlexLayout.Grow="1">
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Description}" />
+                                </StackLayout>
+                                <ImageButton Source="trash.png"
+                                             HeightRequest="20"
+                                             Margin="0, 0, 20, 0"
+                                             Command="{Binding Source={x:Reference ViewPage}, Path=BindingContext.DeleteProductCommand}"
+                                             CommandParameter="{Binding .}"/>
+                            </FlexLayout>
+                        </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
